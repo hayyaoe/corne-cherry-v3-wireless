@@ -1,7 +1,2 @@
 # config/build.yaml
-build_matrix:
-  include:
-    - board: nice_nano_v2
-      shield: corne_left
-    - board: nice_nano_v2
-      shield: corne_right
+{"include": [{"board": "nice_nano_v2", "shield": "corne_left"}, {"board": "nice_nano_v2", "shield": "corne_right"}]}
