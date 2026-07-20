@@ -2,47 +2,23 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-// Deklarasi Konstanta Kalibrasi
-#define TAPPING_TERM 160  
+// Tuning Parameter Snappy Global
+#define TAPPING_TERM 165  // Durasi hold yang pas agar tidak sengaja aktif saat rolling
 #define QUICK_TAP    150  
-#define PRIOR_IDLE   145  // Mengunci HRM agar tidak bocor saat mengetik teks biasa
+#define PRIOR_IDLE   150  // KUNCI UTAMA: Menjaga ketikan alpha 70-90 WPM tetap bersih 100% dari delay
 
 / {
     behaviors {
-        // Homerow Mods untuk Tangan Kiri
-        hm_l: homerow_mods_left {
+        hm: home_row_mods {
             compatible = "zmk,behavior-hold-tap";
-            label = "HM_LEFT";
+            label = "HOME_ROW_MODS";
             #binding-cells = <2>;
-            tapping-term-ms = <TAPPING_TERM>;      // Menggunakan konstanta di atas
-            quick-tap-ms = <QUICK_TAP>;            // Menggunakan konstanta di atas
-            require-prior-idle-ms = <PRIOR_IDLE>;  // AKTIF: Pengunci misfire
-            flavor = "hold-preferred";
+            tapping-term-ms = <TAPPING_TERM>;
+            quick-tap-ms = <QUICK_TAP>;
+            require-prior-idle-ms = <PRIOR_IDLE>;
+            flavor = "hold-preferred";           // HAPUS BALANCED: Langsung eksekusi tanpa buffer tunggu
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <
-                 6  7  8  9 10 11
-                18 19 20 21 22 23
-                30 31 32 33 34 35
-                39 40 41
-            >;
-        };
-
-        // Homerow Mods untuk Tangan Kanan
-        hm_r: homerow_mods_right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HM_RIGHT";
-            #binding-cells = <2>;
-            tapping-term-ms = <TAPPING_TERM>;      // Menggunakan konstanta di atas
-            quick-tap-ms = <QUICK_TAP>;            // Menggunakan konstanta di atas
-            require-prior-idle-ms = <PRIOR_IDLE>;  // AKTIF: Pengunci misfire
-            flavor = "hold-preferred";
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <
-                 0  1  2  3  4  5
-                12 13 14 15 16 17
-                24 25 26 27 28 29
-                36 37 38
-            >;
+            // hold-trigger-on-release;          // Hapus ini karena bertubrukan dengan hold-preferred
         };
     };
 
@@ -51,28 +27,28 @@
 
         default_layer {
             bindings = <
-&kp ESC   &kp Q          &kp W          &kp E           &kp R           &kp T       &kp Y &kp U           &kp I           &kp O          &kp P             &kp BSPC
-&kp LCTRL &hm_l LGUI A   &hm_l LALT S   &hm_l LCTRL D   &hm_l LSHIFT F  &kp G       &kp H &hm_r RSHIFT J  &hm_r RCTRL K   &hm_r RALT L   &hm_r RGUI SEMI   &kp SQT
-&kp LSHFT &kp Z          &kp X          &kp C           &kp V           &kp B       &kp N &kp M           &kp COMMA       &kp DOT        &kp FSLH          &kp ESC
-                                        &kp LGUI        &mo 1           &kp SPACE   &kp RET &mo 2         &kp LALT
+&kp ESC   &kp Q        &kp W        &kp E        &kp R        &kp T       &kp Y &kp U        &kp I        &kp O        &kp P           &kp BSPC
+&kp LCTRL &hm LSHIFT A &hm LALT S   &hm LCTRL D  &hm LGUI F   &kp G       &kp H &hm RGUI J   &hm RCTRL K  &hm RALT L   &hm RSHIFT SEMI &kp SQT
+&kp LSHFT &kp Z        &kp X        &kp C        &kp V        &kp B       &kp N &kp M        &kp COMMA    &kp DOT      &kp FSLH        &kp ESC
+                                    &kp LGUI     &mo 1        &kp SPACE   &kp RET &mo 2      &kp LALT
             >;
         };
 
         lower_layer {
             bindings = <
-&kp ESC   &kp N1         &kp N2         &kp N3          &kp N4          &studio_unlock   &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-&kp LCTRL &bt BT_CLR     &bt BT_SEL 0   &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-&kp LSHFT &trans         &trans         &trans          &trans          &trans           &trans   &trans   &trans &trans    &trans &trans
-                                        &kp LGUI        &trans          &kp SPACE        &kp RET  &trans   &kp LALT
+&kp ESC   &kp N1       &kp N2       &kp N3       &kp N4       &studio_unlock   &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
+&kp LCTRL &bt BT_CLR   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3     &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
+&kp LSHFT &trans       &trans       &trans       &trans       &trans           &trans   &trans   &trans &trans    &trans &trans
+                                    &kp LGUI     &trans       &kp SPACE        &kp RET  &trans   &kp LALT
             >;
         };
 
         raise_layer {
             bindings = <
-&kp ESC   &kp EXCL       &kp AT         &kp HASH        &kp DLLR        &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
-&kp LCTRL &trans         &trans         &trans          &trans          &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp BSLH &kp GRAVE
-&kp LSHFT &trans         &trans         &trans          &trans          &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp PIPE &kp TILDE
-                                        &kp LGUI        &trans          &kp SPACE   &kp RET   &trans    &kp LALT
+&kp ESC   &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
+&kp LCTRL &trans       &trans       &trans       &trans       &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp BSLH &kp GRAVE
+&kp LSHFT &trans       &trans       &trans       &trans       &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp PIPE &kp TILDE
+                                    &kp LGUI     &trans       &kp SPACE   &kp RET   &trans    &kp LALT
             >;
         };
     };
