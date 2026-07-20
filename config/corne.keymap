@@ -8,12 +8,14 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HOME_ROW_MODS";
             #binding-cells = <2>;
-            tapping-term-ms = <165>;             // Dinaikkan tipis agar jari yang menggantung/semi-hold tidak sengaja memicu mod
-            quick-tap-ms = <175>;                // KUNCI: Harus lebih tinggi dari tapping-term agar rolling cepat dipaksa jadi TAP
-            require-prior-idle-ms = <125>;       // Diturunkan agar ketikan rapat seperti "ini" langsung mengunci mode alpha
-            flavor = "balanced";                 
+            
+            // PRIORITAS INSTAN PADA TEXT STREAM
+            flavor = "tap-preferred";            // Karakter langsung keluar detik itu juga tanpa buffer
+            tapping-term-ms = <170>;             // Jeda waktu tegas untuk memicu shortcut secara sadar
+            quick-tap-ms = <150>;                // Mengunci mode TAP penuh saat mengetik cepat berulang
+            require-prior-idle-ms = <100>;       // Kesiapan super responsif setelah keyboard diam sejenak
+            
             bindings = <&kp>, <&kp>;
-            hold-trigger-on-release;             
         };
     };
 
