@@ -9,11 +9,11 @@
             label = "HOME_ROW_MODS";
             #binding-cells = <2>;
             
-            // PRIORITAS INSTAN PADA TEXT STREAM
-            flavor = "tap-preferred";            // Karakter langsung keluar detik itu juga tanpa buffer
-            tapping-term-ms = <170>;             // Jeda waktu tegas untuk memicu shortcut secara sadar
-            quick-tap-ms = <150>;                // Mengunci mode TAP penuh saat mengetik cepat berulang
-            require-prior-idle-ms = <100>;       // Kesiapan super responsif setelah keyboard diam sejenak
+            // ARCHITECTURE FOR DIRECT TAP & SEMI-CHORDING
+            flavor = "tap-preferred";            // Karakter melesat instan tanpa buffer memori
+            tapping-term-ms = <260>;             // Diperlebar agar semi-chording tidak memicu mod tak sengaja
+            quick-tap-ms = <160>;                // Mengunci mode TAP penuh pada pengetikan cepat berulang
+            require-prior-idle-ms = <80>;        // Kesiapan sirkuit yang sangat responsif
             
             bindings = <&kp>, <&kp>;
         };
