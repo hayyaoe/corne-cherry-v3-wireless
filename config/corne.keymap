@@ -8,9 +8,9 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HOME_ROW_MODS";
             #binding-cells = <2>;
-            tapping-term-ms = <145>;             // Memotong delay tunggu secara drastis
+            tapping-term-ms = <160>;             // Memotong delay tunggu secara drastis
             quick-tap-ms = <150>;                // Mengamankan double-tap huruf yang sama
-            require-prior-idle-ms = <130>;       // Menjaga pengetikan 70 WPM tetap bersih dari misfire
+            require-prior-idle-ms = <145>;       // Menjaga pengetikan 70 WPM tetap bersih dari misfire
             flavor = "balanced";                 // Mengizinkan eksekusi hold instan sebelum term habis
             bindings = <&kp>, <&kp>;
             hold-trigger-on-release;             // Akurasi untuk rolling combo tiling WM
