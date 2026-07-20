@@ -2,23 +2,18 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-// Tuning Parameter Snappy Global
-#define TAPPING_TERM 165  // Durasi hold yang pas agar tidak sengaja aktif saat rolling
-#define QUICK_TAP    150  
-#define PRIOR_IDLE   150  // KUNCI UTAMA: Menjaga ketikan alpha 70-90 WPM tetap bersih 100% dari delay
-
 / {
     behaviors {
         hm: home_row_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOME_ROW_MODS";
             #binding-cells = <2>;
-            tapping-term-ms = <TAPPING_TERM>;
-            quick-tap-ms = <QUICK_TAP>;
-            require-prior-idle-ms = <PRIOR_IDLE>;
-            flavor = "hold-preferred";           // HAPUS BALANCED: Langsung eksekusi tanpa buffer tunggu
+            tapping-term-ms = <165>;             // Dinaikkan tipis agar jari yang menggantung/semi-hold tidak sengaja memicu mod
+            quick-tap-ms = <175>;                // KUNCI: Harus lebih tinggi dari tapping-term agar rolling cepat dipaksa jadi TAP
+            require-prior-idle-ms = <125>;       // Diturunkan agar ketikan rapat seperti "ini" langsung mengunci mode alpha
+            flavor = "balanced";                 
             bindings = <&kp>, <&kp>;
-            // hold-trigger-on-release;          // Hapus ini karena bertubrukan dengan hold-preferred
+            hold-trigger-on-release;             
         };
     };
 
